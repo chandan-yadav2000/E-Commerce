@@ -1,0 +1,142 @@
+﻿@model Forms.Models.Register
+
+
+@{
+    ViewBag.Title = "Register";
+
+}
+
+
+
+    <style>
+        label {
+            color: black;
+            font-family: Comic Sans MS;
+            font-size: 18px;
+        }
+
+        #text{
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #radio {
+            display: inline-block;
+            width: 80%;
+            height: 24px;
+            margin-left:-60px;
+            border:none;
+            outline:none;
+            border-block-color:none;
+        }
+
+        #radiolabel {
+            margin-left: -120px;
+            font-size:24px;
+        }
+
+        .error {
+        
+        color:red;
+        }
+
+        body{
+            background-color:cadetblue;
+        }
+    </style>
+
+    @using (Html.BeginForm("AddDetails", "Register",FormMethod.Post))
+            {
+                
+        @Html.ValidationSummary(true)
+<div class="container">
+
+    <div class="row">
+        @Html.LabelFor(a => a.Name)<br />
+        @Html.ValidationMessageFor(a => a.Name, " ", new { @class = "error" })
+        @Html.TextBoxFor(a => a.Name, new { @class = "form-contorl", @id = "text" })<br />
+
+    </div>
+
+    <div class="row">
+
+        @Html.LabelFor(a => a.LastName)<br />
+        @Html.ValidationMessageFor(a => a.LastName, " ", new { @class = "error" })<br />
+        @Html.TextBoxFor(a => a.LastName, new { @class = "form-contorl", @id = "text" })<br />
+    </div>
+
+    <div class="row">
+
+        @Html.LabelFor(a => a.Gender)<br />
+        @Html.ValidationMessageFor(a => a.Gender, " ", new { @class = "error" })<br />
+        @Html.RadioButtonFor(a => a.Gender, "Male", new { @id = "radio" })
+        @Html.Label("Male", new { @id = "radiolabel" })
+        @Html.RadioButtonFor(a => a.Gender, "Female", new { @id = "radio" })
+        @Html.Label("Female", new { @id = "radiolabel" })<br />
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(a => a.Age)<br />
+        @Html.ValidationMessageFor(a => a.Age, " ", new { @class = "error" })<br />
+        @Html.TextBoxFor(a => a.Age, new { @class = "form-contorl", @id = "text" })<br />
+
+     </div>
+
+    <div class="row">
+        @Html.LabelFor(a => a.MobileNo)<br />
+        @Html.ValidationMessageFor(a => a.MobileNo, " ", new { @class = "error" })<br />
+        @Html.TextBoxFor(a => a.MobileNo, new { @class = "form-contorl", @id = "text" })<br />
+
+
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(a => a.Email)<br />
+        @Html.ValidationMessageFor(a => a.Email, " ", new { @class = "error" })<br />
+        @Html.TextBoxFor(a => a.Email, new { @class = "form-contorl", @id = "text" })<br />
+
+
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(a => a.Address)<br />
+        @Html.ValidationMessageFor(a => a.Address, " ", new { @class = "error" })<br />
+        @Html.TextBoxFor(a => a.Address, new { @class = "form-contorl", @id = "text", style="height: 100px;"
+        })<br />
+
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(a => a.Username)<br />
+        @Html.ValidationMessageFor(a => a.Username, " ", new { @class = "error" })<br />
+        @Html.TextBoxFor(a => a.Username, new { @class = "form-contorl", @id = "text" })<br />
+
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(a => a.Password)<br />
+        @Html.ValidationMessageFor(a => a.Password, " ", new { @class = "error" })<br />
+        @Html.TextBoxFor(a => a.Password, new { @class = "form-contorl", @id = "text" })<br />
+
+    </div>
+
+    <div class="row">
+        <button type="submit" class="btn btn-success">SUBMIT</button>
+        <button type="reset" class="btn btn-danger">CANCEL</button>
+    </div>
+
+
+</div>
+
+            }
+ 
+

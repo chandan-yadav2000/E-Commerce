@@ -1,0 +1,113 @@
+﻿@model Forms.Models.Login
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<style>
+    label {
+        color: black;
+        font-family: Comic Sans MS;
+        font-size: 18px;
+    }
+
+    #text {
+        display: block;
+        width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    #radio {
+        display: inline-block;
+        width: 80%;
+        height: 24px;
+        margin-left: -60px;
+        border: none;
+        outline: none;
+        border-block-color: none;
+    }
+
+    legend {
+        width: auto;
+        padding: 0;
+        border-bottom: none;
+        color: black;
+    }
+
+    fieldset {
+        width: auto;
+        margin: 0 0 1.5em 0;
+        padding: 0 1.4em 1.4em 1.4em;
+        border: 2px groove black;
+        margin: 10px;
+    }
+
+    .row {
+        margin-left: 10px;
+    }
+
+    #radiolabel {
+        margin-left: -120px;
+        font-size: 24px;
+    }
+
+    .error {
+        color: red;
+    }
+
+    body {
+        background-color: cadetblue;
+    }
+</style>
+
+
+
+@using (Html.BeginForm("Index", "Login", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Login Information</legend>
+        <div class="container">
+            <p style="font-size:16px;color:red">@ViewBag.ErrorMessage</p>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                @Html.LabelFor(a => a.Username)<br />
+                @Html.ValidationMessageFor(a => a.Username, " ", new { @class = "text-danger" })
+                @Html.TextBoxFor(a => a.Username, new { @class = "form-control", @id = "text" })<br />
+
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(a => a.Password)<br />
+                @Html.ValidationMessageFor(a => a.Password, " ", new { @class = "error" })
+                @Html.TextBoxFor(a => a.Password, new { @class = "form-control", @id = "text" })<br />
+            </div>
+
+
+            <div class="row">
+                <button type="submit" id="savedata" class="btn btn-success">LOGIN</button>
+                <button type="reset" class="btn btn-danger">CANCEL</button>
+                <a href="@Url.Action("Register","Register")" class="btn btn-primary">NEW REGISTERTION</a>
+
+            </div>
+
+        </div>
+    </fieldset>
+
+
+
+
+}
+
+

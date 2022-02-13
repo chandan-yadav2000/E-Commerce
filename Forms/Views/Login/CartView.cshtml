@@ -1,0 +1,73 @@
+﻿@model IList<Forms.tbl_Product>
+
+@{
+    int sum = 0;
+}
+
+<style>
+    body {
+        background-color: cadetblue;
+    }
+
+    th {
+        font-size: 18px;
+    }
+
+    td {
+        color: black;
+    }
+</style>
+
+@{
+    ViewBag.Title = "CartView";
+}
+
+
+<table class="table table-hover">
+    <tr>
+        <th>Product Image</th>
+        <th>Product Name</th>
+        <th>Product Price</th>
+        <th>Category</th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@Url.Action("RetriveImage","Home",new { Id = item.ProductId})" style="width:200px;height:200px;" />
+            </td>
+            <td>@item.ProductName</td>
+            <td>@item.ProductPrice</td>
+            @*<td>@item.tbl_Category.CategoryName</td>*@
+
+
+            <td>
+
+                <a href="@Url.Action("Remove","Login",new {id = item.ProductId})" class="btn btn-danger">Remove</a>
+
+            </td>
+        </tr>
+
+    }
+
+    @foreach (var x in Model)
+    {
+        sum = Convert.ToInt32(x.ProductPrice) + sum;
+    }
+    <tfoot> <tr> <td> </td>   <td> </td>   <td> <b> Total </b></td> <td><b> ₹@sum </b></td>   </tr>   </tfoot>
+</table>
+@foreach (var x in Model)
+{
+    sum = Convert.ToInt32(x.ProductPrice) + sum;
+}
+
+<div id="footer">
+    <div>
+        <a href="@Url.Action("Dashboard","Login")"class="btn btn-success">Continue Shopping</a>
+         <a href="@Url.Action("Index","PaymentGateway")" class="btn btn-warning">Place Order </a>
+    </div>
+</div>
+
+

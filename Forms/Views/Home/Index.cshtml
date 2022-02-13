@@ -1,0 +1,116 @@
+﻿@model Forms.Models.Product
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<style>
+    label {
+        color: black;
+        font-family: Comic Sans MS;
+        font-size: 18px;
+    }
+
+    #text {
+        display: block;
+        width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #555555;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    #radio {
+        display: inline-block;
+        width: 80%;
+        height: 24px;
+        margin-left: -60px;
+        border: none;
+        outline: none;
+        border-block-color: none;
+    }
+
+    legend {
+        width: auto;
+        padding: 0;
+        border-bottom: none;
+        color: black;
+    }
+
+    fieldset {
+        width: auto;
+        margin: 0 0 1.5em 0;
+        padding: 0 1.4em 1.4em 1.4em;
+        border: 2px groove black;
+        margin: 10px;
+    }
+
+    .row {
+        margin-left: 10px;
+    }
+
+    #radiolabel {
+        margin-left: -120px;
+        font-size: 24px;
+    }
+
+    .error {
+        color: red;
+    }
+
+    body {
+        background-color: cadetblue;
+    }
+</style>
+
+@using (Html.BeginForm("AddProduct", "Home", FormMethod.Post, new
+{
+    enctype = "multipart/form-data"
+}))
+{
+    <div class="container">
+        @Html.HiddenFor(x => x.ProductId)
+        <div class="row">
+            @Html.LabelFor(a => a.ProductImage)<br />
+            <input type="file" name="ProductImage" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" />
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(a => a.ProductName)<br />
+            @Html.TextBoxFor(a => a.ProductName, new { @id = "text" })<br />
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(a => a.ProductPrice)<br />
+            @Html.TextBoxFor(a => a.ProductPrice, new { @id = "text" })<br />
+        </div>
+
+
+        <div class="row">
+            @Html.LabelFor(a => a.CategoryId)<br />
+            @Html.DropDownListFor(a => a.CategoryId, new SelectList(ViewBag.data, "CategoryId", "CategoryName"), new { @id = "text", style = "color:black" })<br />
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(a => a.ProductDetails)<br />
+            @Html.TextBoxFor(a => a.ProductDetails, new { @id = "text", style = "height: 100px;" })<br />
+        </div>
+
+
+
+        <div class="row">
+            <button type="submit" class="btn btn-success">Add Product</button>
+            <button type="reset" class="btn btn-danger"> Cancel</button>
+        </div>
+
+    </div>
+
+}

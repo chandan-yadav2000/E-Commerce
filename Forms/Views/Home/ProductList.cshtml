@@ -1,0 +1,55 @@
+﻿@model IList<Forms.tbl_Product>
+
+
+<style>
+    body {
+        background-color: cadetblue;
+    }
+
+    th {
+    font-size:18px;
+    }
+
+    td {
+    color:black;
+    }
+</style>
+
+@{
+    ViewBag.Title = "ProductList";
+}
+
+
+<table class="table table-hover">
+    <tr>
+        <th>Product Image</th>
+        <th>Product Name</th>
+        <th>Product Price</th>
+        <th>Category</th>
+        
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        <img src="@Url.Action("RetriveImage","Home",new { Id = item.ProductId})" style="width:200px;height:200px;" />
+    </td>
+    <td>@item.ProductName</td>
+    <td>@item.ProductPrice</td>
+    <td>@item.tbl_Category.CategoryName</td>
+
+
+    <td>
+        <a href="@Url.Action("Index",new {item.ProductId,item.ProductName,item.ProductPrice,item.CategoryId,item.ProductDetails})" class="btn btn-success">Edit</a>
+        <a href="@Url.Action("Delete",new {id = item.ProductId})" class="btn btn-danger">Delete</a>
+
+    </td>
+</tr>
+
+    }
+
+</table>
+
+
+

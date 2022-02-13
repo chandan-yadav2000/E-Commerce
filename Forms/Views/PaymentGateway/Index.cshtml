@@ -1,0 +1,100 @@
+﻿@model IList<Forms.tbl_Mvc>
+
+@{
+    ViewBag.Title = "PaymentGateway";
+}
+
+<style>
+    label {
+        color: black;
+        font-family: Comic Sans MS;
+        font-size: 18px;
+    }
+
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+
+    input {
+        display: block;
+        width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: black;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+
+    #radio {
+        display: inline-block;
+        width: 80%;
+        height: 24px;
+        margin-left: -60px;
+        border: none;
+        outline: none;
+        border-block-color: none;
+    }
+
+    #radiolabel {
+        margin-left: -120px;
+        font-size: 24px;
+    }
+
+    .error {
+        color: red;
+    }
+
+    *.disabled {
+        cursor: not-allowed;
+    }
+
+    body {
+        background-color: cadetblue;
+    }
+</style>
+
+<h2 style="text-align:center">PaymentGateway</h2>
+
+
+@using (Html.BeginForm())
+{
+
+    foreach(var item in Model) { 
+    <div class="container">
+
+        <div class="row">
+            <label>Full Name</label><br />
+            <input type="text" value="@item.Name @item.LastName" /><br />
+
+        </div>
+        <div class="row">
+            <label>MobileNo</label><br />
+            <input type="text" id="text" value="@item.MobileNo" /><br />
+        </div>
+
+        <div class="row">
+            <label>Email</label><br />
+            <input type="text" id="text" value="@item.Email" /><br />
+        </div>
+
+        <div class="row">
+            <label>Address</label><br />
+            <input type="text" id="text" value="@item.Address" /><br />
+        </div>
+
+        <div class="row">
+            <button type="submit" class="btn btn-success">Buy</button>
+            <button type="submit" class="btn btn-danger">@Html.ActionLink("Cancel", "Dashboard", "Login") </button>
+        </div>
+
+
+    </div>
+    }
+}

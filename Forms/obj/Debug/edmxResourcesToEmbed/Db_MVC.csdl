@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="testMvcModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="testMvcEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="testMvcModel.sysdiagram" />
+    <EntitySet Name="tbl_Category" EntityType="testMvcModel.tbl_Category" />
+    <EntitySet Name="tbl_Product" EntityType="testMvcModel.tbl_Product" />
+    <AssociationSet Name="FK_tbl_Product_tbl_Category1" Association="testMvcModel.FK_tbl_Product_tbl_Category1">
+      <End Role="tbl_Category" EntitySet="tbl_Category" />
+      <End Role="tbl_Product" EntitySet="tbl_Product" />
+    </AssociationSet>
+    <EntitySet Name="tbl_User" EntityType="testMvcModel.tbl_User" />
+    <EntitySet Name="tbl_Admin" EntityType="testMvcModel.tbl_Admin" />
+    <EntitySet Name="tbl_Mvc" EntityType="testMvcModel.tbl_Mvc" />
+    <EntitySet Name="UserRoles" EntityType="testMvcModel.UserRole" />
+    <AssociationSet Name="FK_UserRole_tbl_Admin" Association="testMvcModel.FK_UserRole_tbl_Admin">
+      <End Role="tbl_Admin" EntitySet="tbl_Admin" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_tbl_Mvc" Association="testMvcModel.FK_UserRole_tbl_Mvc">
+      <End Role="tbl_Mvc" EntitySet="tbl_Mvc" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbl_Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_Product" Relationship="testMvcModel.FK_tbl_Product_tbl_Category1" FromRole="tbl_Category" ToRole="tbl_Product" />
+  </EntityType>
+  <EntityType Name="tbl_Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="ProductPrice" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="ProductDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="ProductImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="tbl_Category" Relationship="testMvcModel.FK_tbl_Product_tbl_Category1" FromRole="tbl_Product" ToRole="tbl_Category" />
+  </EntityType>
+  <Association Name="FK_tbl_Product_tbl_Category1">
+    <End Type="testMvcModel.tbl_Category" Role="tbl_Category" Multiplicity="0..1" />
+    <End Type="testMvcModel.tbl_Product" Role="tbl_Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="tbl_Product">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tbl_User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tbl_Admin">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="UserRoles" Relationship="testMvcModel.FK_UserRole_tbl_Admin" FromRole="tbl_Admin" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="tbl_Mvc">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Age" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserRoles" Relationship="testMvcModel.FK_UserRole_tbl_Mvc" FromRole="tbl_Mvc" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="AdminId" Type="Int32" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tbl_Admin" Relationship="testMvcModel.FK_UserRole_tbl_Admin" FromRole="UserRole" ToRole="tbl_Admin" />
+    <NavigationProperty Name="tbl_Mvc" Relationship="testMvcModel.FK_UserRole_tbl_Mvc" FromRole="UserRole" ToRole="tbl_Mvc" />
+  </EntityType>
+  <Association Name="FK_UserRole_tbl_Admin">
+    <End Type="testMvcModel.tbl_Admin" Role="tbl_Admin" Multiplicity="0..1" />
+    <End Type="testMvcModel.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Admin">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="AdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_tbl_Mvc">
+    <End Type="testMvcModel.tbl_Mvc" Role="tbl_Mvc" Multiplicity="0..1" />
+    <End Type="testMvcModel.UserRole" Role="UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Mvc">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

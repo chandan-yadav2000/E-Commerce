@@ -1,0 +1,50 @@
+﻿@model IList<Forms.tbl_Product>
+@{
+    ViewBag.Title = "ProductList";
+}
+
+<style>
+    body {
+        background-color: cadetblue;
+    }
+
+    input {
+    border-radius:10px;
+   border-color:black;
+   opacity:0.5;
+   
+   font-size:20px;
+    }
+
+</style>
+
+<div class="container">
+    <div class="col-lg-2">
+        <h2><b>Dashboard</b></h2>
+    </div>
+    <div style="text-align:right;">
+        @Html.TextBox("Search",new { style = "height: 100px;" })   <button class="glyphicon glyphicon-search btn btn-danger" style=" outline: none;" > Search </button>
+    </div>
+</div>
+<hr/>
+
+    @foreach (var item in Model)
+    {
+
+        <div class="container">
+            <div class="col-lg-2" style="height:auto; width:auto;">
+                <img src="@Url.Action("RetriveImage", "Home", new { Id = item.ProductId })" style="width:200px;height:200px;" /> <br />
+            </div>
+            <div class="row">
+                @Html.Label(item.ProductName, new { style = "font-size:36px;color:white" })<br />
+                <text><b style="font-size:24px" }>Rs.</b> @Html.Label(item.ProductPrice, new { style = "font-size:24px" }) <b style="font-size:24px">/-</b></text><br />
+
+                <p style="font-size:18px;color:black">@item.ProductDetails</p>
+
+                <a href="@Url.Action("Cart","Login",item)" class="btn btn-warning" style="margin-left:700px"><span class="glyphicon glyphicon-shopping-cart">Add Cart</span></a>
+
+            </div><br /><hr />
+        </div>
+
+    }
+
